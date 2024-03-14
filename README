@@ -1,0 +1,25 @@
+Setting Up 
+
+1) Update python to the newest version @ https://www.python.org/  
+
+2) Usually pip will be installed after downloading the newest version of python. On the off chance, you can install or updata pip yourself 
+    
+    2.1) Install/update pip via "py -m pip install --upgrade pip" on command line 
+    OR 
+    2.2) "py -m ensurepip --upgrade"
+
+    2.3) Check this documentation for help on pip if steps above do not work 
+        https://pip.pypa.io/en/stable/installation/  (or resort to google!) 
+
+3) Install necessary pips on command line 
+
+    3.1) "pip install pymsfilereader" 
+    3.2) "pip install comtypes" 
+    3.3) "pip install comtype-package.whl" (I'd do 3.2 and 3.3 to be safe) 
+
+4) Download the necessary MSFileReader 
+
+    4.1) Steps are here :  https://github.com/frallain/pymsfilereader under 
+    "Thermo MSFileReader Python bindings" Heading 
+
+5) If you encounter any issue, you can let me know (or stack overflow it :D ) 
