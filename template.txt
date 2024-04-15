@@ -1,5 +1,19 @@
-Hi my name is {Ion Source Type}. 
-Some of my hobbies are {Method Duration (min)} and {Application Mode}. 
-I really enjoy watching {Total Carrier Gas Flow}. 
-Nice to meet you {Pressure Mode} 
+#MasterScan
 
+For data-dependent acquisition (DDA), 
+the MS1 scan resolution was set to {Orbitrap Resolution}  
+(at m/z 200). The MS1 scan range was {Scan Range (m/z)} m/z, 
+the AGC target was {Normalized AGC Target}, and the maximum injection time was 
+{Maximum Injection Time (ms)} ms. 
+
+#Charge state
+Precursor ions with charge states of 
+{Include charge state(s)} 
+
+#DDMSN
+were isolated with the {Isolation Mode} 
+mass filter and fragmented by higher-energy collisional dissociation 
+(HCD) at a normalized collision energy (NCE) of {Collision Energy (%)}%. 
+The first mass was set to  {FirstMass}, the AGC target was {Normalized AGC Target}, 
+and the maximum injection time was {Maximum Injection Time (ms)} ms for
+ resolution of {Orbitrap Resolution}. 
