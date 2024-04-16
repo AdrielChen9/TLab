@@ -21,7 +21,6 @@ def match(current_dict, line):
         case _: 
             pass  
 
-
 #Adds the key-value pair to the respective dict based on the line 
 def fill_out_dict(dict, line): 
 
@@ -42,9 +41,8 @@ def fill_out_dict(dict, line):
         key = line.strip()
         dict[key] = ""
 
-
 #Determines which section we are in
-def read_values_from_file(filename):
+def read_instrument_lines_from_file(filename):
 
     #determines which section we are in ; ignores everything else
     with open(filename, 'r') as file:
@@ -62,14 +60,13 @@ def read_values_from_file(filename):
 
     return 1
 
-
-#User choose which instrument method to be read
-def select_file():
+#Select the instrument method to be read
+def select_instrument_method():
     root = tk.Tk()
     root.withdraw()  # Hide the root window
 
     # Prompt user to select a file
-    file_path = filedialog.askopenfilename(title="Select values.txt file")
+    file_path = filedialog.askopenfilename(title="Select the instrument method file(in .txt)")
 
     if file_path:
         return file_path
@@ -77,6 +74,19 @@ def select_file():
         print("No file selected.")
         return None
 
+#Select the template file you want filled out 
+def select_template(): 
+    root = tk.Tk()
+    root.withdraw()  # Hide the root window
+
+    # Prompt user to select a file
+    file_path = filedialog.askopenfilename(title="Select the template file (in .txt form)")
+
+    if file_path:
+        return file_path
+    else:
+        print("No file selected.")
+        return None
 
 #Reads the template, fills it, then returns a filled out template as a separate txt
 def read_template(textFile):
@@ -115,16 +125,26 @@ def read_template(textFile):
 
 
 def main():
-    #selecting and reading the file 
-    values_file = select_file()
-    if not values_file:
+
+    #select the template  
+    template_file = select_template()
+    if not template_file:
+        return
+
+    #select the instrument method     
+    instrument_file = select_instrument_method()
+    if not instrument_file:
         return 
     
     #fill out the dicts 
-    read_values_from_file(values_file)
+    read_instrument_lines_from_file(instrument_file)
 
     #fill out the template and return 
-    read_template('template.txt') 
+    read_template(template_file) 
+
+    
+
+
 
 
 main()
