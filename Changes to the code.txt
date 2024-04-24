@@ -3,3 +3,13 @@ Changes to the code
 1. Extract data 
 	try, catch exception for if you extract with no file selected
 
+
+
+
+print out method into a text box 
+have another text box right next to it for users to fill out a template 	
+	allows users to scroll through the instrument method and pick tags they want 
+	rather than opening a new file and scrolling + opening a word doc and tabbing back and forth 
+
+
+	
