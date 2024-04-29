@@ -15,22 +15,22 @@ button_frame.pack(pady=10)
 
 # Buttons
 open_button = tk.Button(button_frame, text="Select Instrument File", command=lambda :open_file(file_label))
-open_button.grid(row=0, column=0, padx=5)
+open_button.grid(row=0, column=0, padx=5, pady= 10)
 
 extract_button = tk.Button(button_frame, text="Extract Instrument Method", command=lambda: extract_data(message_label, instrument_method_display))
-extract_button.grid(row=0, column=1, padx=5)
+extract_button.grid(row=0, column=1, padx=5, pady= 10)
 
 save_to_button = tk.Button(button_frame, text="Save IM to", command=lambda: save_to(message_label))
-save_to_button.grid(row=0, column=2, padx=5)
+save_to_button.grid(row=0, column=2, padx=5, pady= 10)
 
 template_button = tk.Button(button_frame, text="Upload Template", command=lambda: select_template(message_label,template_display))
-template_button.grid(row=0, column=3, padx=5)
+template_button.grid(row=1, column=0, padx=5, pady= 10)
 
 fill_template_button = tk.Button(button_frame, text="Fill Template", command=lambda: read_template(message_label, instrument_method_display, template_display, filled_template))
-fill_template_button.grid(row=0, column=4, padx=5)
+fill_template_button.grid(row=1, column=1, padx=5, pady= 10)
 
 save_template_button = tk.Button(button_frame, text="Save Template to", command=lambda: save_filled_template(message_label, filled_template))
-save_template_button.grid(row=0, column=5, padx=5)
+save_template_button.grid(row=1, column=2, padx=5, pady= 10)
 
 # Display of the current file name
 file_label = tk.Label(root, text="Current File Paths:")
@@ -40,15 +40,27 @@ file_label.pack()
 message_label = tk.Label(root, text="Messages:")
 message_label.pack()
 
-#Text display for Instrument Methods 
-instrument_method_display = tk.Text(root, height=30, width=30, wrap=tk.NONE)
-instrument_method_display.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+# Create a textbox with a heading 
+def create_text_display_with_heading(parent, heading_text):
+    # Create a frame to hold the text box and heading
+    frame = tk.Frame(parent)
+    frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-template_display = tk.Text(root, height=30, width=30, wrap=tk.NONE)
-template_display.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    # Add a label for the heading
+    heading_label = tk.Label(frame, text=heading_text, font=('Helvetica', 12, 'bold'))
+    heading_label.pack(side=tk.TOP)
 
-filled_template = tk.Text(root, height=30, width=30, wrap=tk.NONE)
-filled_template.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    # Add the text box
+    text_box = tk.Text(frame, height=30, width=30, wrap=tk.NONE)
+    text_box.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+    return text_box
+
+# Create the text displays with headings
+instrument_method_display = create_text_display_with_heading(root, "Instrument Method Display")
+template_display = create_text_display_with_heading(root, "Template Display")
+filled_template = create_text_display_with_heading(root, "Filled Template")
+
 
 #Main loop
 root.mainloop()
