@@ -3,11 +3,11 @@ import tkinter as tk
 from tkinter import filedialog
 import os 
 
-
 current_files = []
 extracted_info = []
 
 def open_file(file_label):
+    current_files.clear()
     initial_dir = os.getcwd()
     file_paths = filedialog.askopenfilenames(initialdir=initial_dir, filetypes=[("RAW file", "*.raw")], multiple=True)
 
@@ -40,14 +40,22 @@ def extract_data(message_label, instrument_method_preview):
 
     message_label.config(text="Message: Instrument Method Successfully Extracted")
 
-
 def save_to(message_label): 
-    output_folder = filedialog.askdirectory(title="Select Output Folder")
-    if output_folder:
-        for file_path, instrument_method in zip(current_files, extracted_info):
-            file_name = os.path.basename(file_path)
-            output_file_path = os.path.join(output_folder, f"{file_name}_instrument_method.txt")
-            with open(output_file_path, "w") as output_file:
-                output_file.write(str(instrument_method))
+    if not current_files or not extracted_info:  #if nothing is selected
+        message_label.config(text="Messages: Nothing selected.")
+    else:     
+        output_folder = filedialog.askdirectory(title="Select Output Folder")
+        if output_folder:
+            for file_path, instrument_method in zip(current_files, extracted_info):
+                file_name = os.path.basename(file_path)
+                output_file_path = os.path.join(output_folder, f"{file_name}_instrument_method.txt")
+                with open(output_file_path, "w") as output_file:
+                    output_file.write(str(instrument_method))
 
-    message_label.config(text="Messages: Data extraction completed.")
+        message_label.config(text="Messages: Data extraction completed.")
+
+def get_current_files():
+    return current_files
+
+def get_extracted_info():
+    return extracted_info
