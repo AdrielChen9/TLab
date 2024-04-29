@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import filedialog
 
+from getInstrument import size_of_current_files 
+
 #The various dicts for the template 
 masterscan_dict = {} 
 charge_stage_dict = {} 
@@ -30,37 +32,42 @@ def select_template(message_label,template_display):
 #Reads the template, fills it, then returns a filled out template as a separate txt
 def read_template(message_label, instrument_method_preview, template_display, filled_template):
 
-    read_instrument_lines_from_file(instrument_method_preview)
+    count = size_of_current_files()
+    if (count != 1):
+        message_label.config(text="Message: Must have one instrument method selected")
 
-    text = template_display.get('1.0', tk.END)
+    else: 
+        read_instrument_lines_from_file(instrument_method_preview)
 
-    # Split the text into sections
-    sections = text.split('#')
+        text = template_display.get('1.0', tk.END)
 
-    # Initialize filled sections
-    filled_sections = []
+        # Split the text into sections
+        sections = text.split('#')
 
-    # Fill in the blanks for each section
-    for section in sections[1:]:  # Skip first empty element
-        section_name, section_text = section.split('\n', 1)
-        section_dict = None
-    
-        if section_name.strip() == 'MasterScan':
-            section_dict = masterscan_dict
-        elif section_name.strip() == 'Charge state':
-            section_dict = charge_stage_dict
-        elif section_name.strip() == 'DDMSN':
-            section_dict = ddmsn_dict
+        # Initialize filled sections
+        filled_sections = []
+
+        # Fill in the blanks for each section
+        for section in sections[1:]:  # Skip first empty element
+            section_name, section_text = section.split('\n', 1)
+            section_dict = None
         
-        if section_dict:
-            filled_section = section_text.format(**section_dict)
-            filled_sections.append(filled_section)
+            if section_name.strip() == 'MasterScan':
+                section_dict = masterscan_dict
+            elif section_name.strip() == 'Charge state':
+                section_dict = charge_stage_dict
+            elif section_name.strip() == 'DDMSN':
+                section_dict = ddmsn_dict
+            
+            if section_dict:
+                filled_section = section_text.format(**section_dict)
+                filled_sections.append(filled_section)
 
 
-    for filled_section in filled_sections:
-        filled_template.insert(tk.END, filled_section)
-    
-    message_label.config(text="Message: Template  filled")
+        for filled_section in filled_sections:
+            filled_template.insert(tk.END, filled_section)
+        
+        message_label.config(text="Message: Template  filled")
 
 #Determines which section we are in
 def read_instrument_lines_from_file(instrument_method_preview):

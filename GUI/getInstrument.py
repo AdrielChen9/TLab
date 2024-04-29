@@ -16,6 +16,7 @@ def open_file(file_label):
         current_files.extend(file_paths)
         update_file_label(file_label)
 
+
 #Update path name 
 def update_file_label(file_label):
     file_label.config(text="Current File Paths:\n" + "\n".join("\u2022 " + file_path for file_path in current_files))
@@ -57,3 +58,6 @@ def save_to(message_label):
                     output_file.write(str(instrument_method))
 
         message_label.config(text="Messages: Data extraction completed.")
+
+def size_of_current_files(): 
+    return len(current_files)
