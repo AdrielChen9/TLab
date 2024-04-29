@@ -6,6 +6,7 @@ import os
 current_files = []
 extracted_info = []
 
+#Select a .raw file to open 
 def open_file(file_label):
     current_files.clear()
     initial_dir = os.getcwd()
@@ -15,10 +16,12 @@ def open_file(file_label):
         current_files.extend(file_paths)
         update_file_label(file_label)
 
+#Update path name 
 def update_file_label(file_label):
     file_label.config(text="Current File Paths:\n" + "\n".join("\u2022 " + file_path for file_path in current_files))
 
-def extract_data(message_label, instrument_method_preview):
+#Get the instrument method 
+def extract_data(message_label, instrument_method_display):
     if not current_files:
         message_label.config(text="Messages: No file selected")
         return
@@ -31,7 +34,7 @@ def extract_data(message_label, instrument_method_preview):
             extracted_info.append(instrument_method)
 
             for item in extracted_info: 
-                instrument_method_preview.insert(tk.END, item + "\n")
+                instrument_method_display.insert(tk.END, item + "\n")
 
         except Exception as e:
             error = f"Error extracting data from {file}: {e}"
@@ -40,6 +43,7 @@ def extract_data(message_label, instrument_method_preview):
 
     message_label.config(text="Message: Instrument Method Successfully Extracted")
 
+#Save the data as a .txt file to
 def save_to(message_label): 
     if not current_files or not extracted_info:  #if nothing is selected
         message_label.config(text="Messages: Nothing selected.")
@@ -53,9 +57,3 @@ def save_to(message_label):
                     output_file.write(str(instrument_method))
 
         message_label.config(text="Messages: Data extraction completed.")
-
-def get_current_files():
-    return current_files
-
-def get_extracted_info():
-    return extracted_info

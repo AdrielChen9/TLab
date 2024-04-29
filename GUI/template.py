@@ -21,7 +21,7 @@ def select_template(message_label,template_display):
         template_display.delete('1.0', tk.END)
         template_display.insert(tk.END, template_content)
 
-        message_label.config(text="Message: Template Successfully Uploaded")
+        message_label.config(text="Message: Template selected")
 
         return file_path
     else:
@@ -87,7 +87,7 @@ def read_instrument_lines_from_file(instrument_method_preview):
     return 1
 
 #Reads the template, fills it, then returns a filled out template as a separate txt
-def read_template(instrument_method_preview, template_display, filled_template):
+def read_template(message_label, instrument_method_preview, template_display, filled_template):
 
     read_instrument_lines_from_file(instrument_method_preview)
 
@@ -118,9 +118,12 @@ def read_template(instrument_method_preview, template_display, filled_template):
 
     for filled_section in filled_sections:
         filled_template.insert(tk.END, filled_section)
+    
+    message_label.config(text="Message: Template  filled")
 
 
-def save_filled_template(filled_template):
+
+def save_filled_template(message_label, filled_template):
     # Get the content from the additional_text Text widget
     text_content = filled_template.get('1.0', tk.END)
 
@@ -136,7 +139,7 @@ def save_filled_template(filled_template):
         try:
             with open(file_path, 'w') as file:
                 file.write(text_content)
-            print(f"Text saved successfully to: {file_path}")
+            message_label.config(text="Message: Template Saved")
         except Exception as e:
             print(f"Error occurred while saving file: {e}")
     else:
