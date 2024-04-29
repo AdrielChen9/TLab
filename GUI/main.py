@@ -4,8 +4,7 @@ from tkinter import filedialog
 from getInstrument import open_file,extract_data, save_to
 from template import * 
 
-
-# Main window
+# Main frame
 root = tk.Tk()
 root.title("Instrument Method Extraction and Template Building From Raw MS Files")
 
@@ -13,32 +12,43 @@ root.title("Instrument Method Extraction and Template Building From Raw MS Files
 button_frame = tk.Frame(root)
 button_frame.pack(pady=10)
 
-# Buttons
+# Labels for each row of buttons
+label_row1 = tk.Label(button_frame, text="Instrument Method Actions: ")
+label_row1.grid(row=0, column=0, columnspan=1)  # Spans across all three columns of buttons
+
+label_row2 = tk.Label(button_frame, text="Template Actions: ")
+label_row2.grid(row=1, column=0, columnspan=1)  # Spans across all three columns of buttons
+
+
+# The buttons
 open_button = tk.Button(button_frame, text="Select Instrument File", command=lambda :open_file(file_label))
-open_button.grid(row=0, column=0, padx=5, pady= 10)
+open_button.grid(row=0, column=1, padx=5, pady= 10)
 
 extract_button = tk.Button(button_frame, text="Extract Instrument Method", command=lambda: extract_data(message_label, instrument_method_display))
-extract_button.grid(row=0, column=1, padx=5, pady= 10)
+extract_button.grid(row=0, column=2, padx=5, pady= 10)
 
-save_to_button = tk.Button(button_frame, text="Save IM to", command=lambda: save_to(message_label))
-save_to_button.grid(row=0, column=2, padx=5, pady= 10)
+save_to_button = tk.Button(button_frame, text="Save to", command=lambda: save_to(message_label))
+save_to_button.grid(row=0, column=3, padx=5, pady= 10)
 
 template_button = tk.Button(button_frame, text="Upload Template", command=lambda: select_template(message_label,template_display))
-template_button.grid(row=1, column=0, padx=5, pady= 10)
+template_button.grid(row=1, column=1, padx=5, pady= 10)
 
 fill_template_button = tk.Button(button_frame, text="Fill Template", command=lambda: read_template(message_label, instrument_method_display, template_display, filled_template))
-fill_template_button.grid(row=1, column=1, padx=5, pady= 10)
+fill_template_button.grid(row=1, column=2, padx=5, pady= 10)
 
 save_template_button = tk.Button(button_frame, text="Save Template to", command=lambda: save_filled_template(message_label, filled_template))
-save_template_button.grid(row=1, column=2, padx=5, pady= 10)
+save_template_button.grid(row=1, column=3, padx=5, pady= 10)
+
 
 # Display of the current file name
 file_label = tk.Label(root, text="Current File Paths:")
 file_label.pack()
 
+
 # Message display
 message_label = tk.Label(root, text="Messages:")
 message_label.pack()
+
 
 # Create a textbox with a heading 
 def create_text_display_with_heading(parent, heading_text):
@@ -56,11 +66,9 @@ def create_text_display_with_heading(parent, heading_text):
 
     return text_box
 
-# Create the text displays with headings
+# Creating the textboxes and headings 
 instrument_method_display = create_text_display_with_heading(root, "Instrument Method Display")
 template_display = create_text_display_with_heading(root, "Template Display")
 filled_template = create_text_display_with_heading(root, "Filled Template")
 
-
-#Main loop
 root.mainloop()
