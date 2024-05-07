@@ -30,7 +30,7 @@ extract_button.grid(row=0, column=2, padx=5, pady= 10)
 save_to_button = tk.Button(button_frame, text="Save Instrument Method to", command=lambda: save_to(message_label))
 save_to_button.grid(row=0, column=3, padx=5, pady= 10)
 
-template_button = tk.Button(button_frame, text="Upload Template", command=lambda: select_template(message_label,template_display))
+template_button = tk.Button(button_frame, text="Select Template", command=lambda: select_template(message_label,template_display))
 template_button.grid(row=1, column=1, padx=5, pady= 10)
 
 fill_template_button = tk.Button(button_frame, text="Fill Template", command=lambda: read_template(message_label, instrument_method_display, template_display, filled_template))
