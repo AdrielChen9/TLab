@@ -27,7 +27,7 @@ open_button.grid(row=0, column=1, padx=5, pady= 10)
 extract_button = tk.Button(button_frame, text="Extract Instrument Method", command=lambda: extract_data(message_label, instrument_method_display))
 extract_button.grid(row=0, column=2, padx=5, pady= 10)
 
-save_to_button = tk.Button(button_frame, text="Save to", command=lambda: save_to(message_label))
+save_to_button = tk.Button(button_frame, text="Save Instrument Method to", command=lambda: save_to(message_label))
 save_to_button.grid(row=0, column=3, padx=5, pady= 10)
 
 template_button = tk.Button(button_frame, text="Upload Template", command=lambda: select_template(message_label,template_display))
@@ -69,6 +69,6 @@ def create_text_display_with_heading(parent, heading_text):
 # Creating the textboxes and headings 
 instrument_method_display = create_text_display_with_heading(root, "Instrument Method Display")
 template_display = create_text_display_with_heading(root, "Template Display")
-filled_template = create_text_display_with_heading(root, "Filled Template")
+filled_template = create_text_display_with_heading(root, "Filled Template Display")
 
 root.mainloop()
